@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:machine_test1/auth/service.dart';
 import 'package:machine_test1/auth/signup.dart';
 import 'package:machine_test1/core/costant/Colors.dart';
 import 'package:machine_test1/widgets/button.dart';
@@ -6,6 +7,12 @@ import 'package:machine_test1/widgets/text.dart';
 TextEditingController emailcontroller=TextEditingController();
 TextEditingController passwordcontroller=TextEditingController();
 final formKey=GlobalKey<FormState>();
+login(context){
+    if(formKey.currentState!.validate()){
+      print("success");
+      // Navigator.push(context,MaterialPageRoute(builder:(context)=> const HomeScreen()));
+  }
+  }
 class Login extends StatefulWidget {
   const Login({super.key});
   
@@ -14,6 +21,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  AuthService signinauth=AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,6 +123,8 @@ class _LoginState extends State<Login> {
                 button(
                     text: "Log In",
                     buttonAction: () {
+                      login(context);
+              signinauth.login(emailcontroller.text,passwordcontroller.text);
                       // SigninPage();
                       // login(context);
                       }    
